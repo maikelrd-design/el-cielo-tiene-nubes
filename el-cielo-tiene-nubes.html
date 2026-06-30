@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>El cielo tiene nubes, pero no llueve — Alba Farrapeira Domínguez</title>
+<style>
+  :root{
+    --azul:#1d3a63; --azul-2:#2f5689; --cielo:#bcd6f0; --cielo-2:#e8f1fb;
+    --crema:#fbf7f0; --tinta:#26303d; --suave:#5a6675; --dorado:#c8a96a;
+    --linea:#e3ddd2; --ok:#2e7d52; --rojo:#b3433a;
+    --sombra:0 10px 35px rgba(29,58,99,.10);
+    --radio:18px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; font-family:'Segoe UI',system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;
+    color:var(--tinta); background:var(--crema); line-height:1.65; font-size:17px;
+  }
+  h1,h2,h3{font-family:Georgia,'Times New Roman',serif; line-height:1.2; color:var(--azul); font-weight:700;}
+  img{max-width:100%; display:block}
+  a{color:var(--azul-2)}
+  .wrap{max-width:1080px; margin:0 auto; padding:0 22px}
+  section{padding:78px 0}
+  .eyebrow{letter-spacing:.22em; text-transform:uppercase; font-size:.72rem; font-weight:700; color:var(--dorado); margin:0 0 12px}
+  .lead{font-size:1.12rem; color:var(--suave)}
+
+  /* NAV */
+  nav{position:sticky; top:0; z-index:50; background:rgba(251,247,240,.92); backdrop-filter:blur(8px); border-bottom:1px solid var(--linea)}
+  nav .wrap{display:flex; align-items:center; gap:18px; height:64px}
+  .brand{font-family:Georgia,serif; font-weight:700; color:var(--azul); font-size:1.05rem; white-space:nowrap}
+  .navlinks{display:flex; gap:6px; margin-left:auto; flex-wrap:wrap; justify-content:flex-end}
+  .navlinks a{padding:8px 12px; border-radius:10px; text-decoration:none; color:var(--tinta); font-size:.92rem; font-weight:600}
+  .navlinks a:hover{background:var(--cielo-2); color:var(--azul)}
+  .nav-cta{background:var(--azul); color:#fff !important}
+  .nav-cta:hover{background:var(--azul-2) !important; color:#fff !important}
+
+  /* HERO */
+  .hero{background:linear-gradient(160deg,var(--cielo-2),#fff 55%,var(--crema)); position:relative; overflow:hidden}
+  .hero .wrap{display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center}
+  .hero-text h1{font-size:clamp(2.2rem,4.6vw,3.4rem); margin:.2em 0 .35em}
+  .hero-text .sub{font-size:1.18rem; color:var(--suave); font-style:italic; margin-bottom:8px}
+  .badge-real{display:inline-block; background:var(--dorado); color:#fff; padding:5px 14px; border-radius:999px; font-size:.72rem; letter-spacing:.16em; text-transform:uppercase; font-weight:700; margin-bottom:18px}
+  .price-row{display:flex; align-items:center; gap:18px; margin:26px 0 14px; flex-wrap:wrap}
+  .price{font-family:Georgia,serif; font-size:2rem; color:var(--azul); font-weight:700}
+  .price small{display:block; font-size:.7rem; letter-spacing:.15em; text-transform:uppercase; color:var(--suave); font-family:'Segoe UI',sans-serif}
+  .btn{display:inline-block; background:var(--azul); color:#fff; text-decoration:none; padding:14px 28px; border-radius:999px; font-weight:700; box-shadow:var(--sombra); border:none; cursor:pointer; font-size:1rem; transition:transform .15s, background .15s}
+  .btn:hover{transform:translateY(-2px); background:var(--azul-2)}
+  .btn.ghost{background:transparent; color:var(--azul); border:2px solid var(--azul)}
+  .btn.ghost:hover{background:var(--azul); color:#fff}
+  .specs{display:flex; gap:22px; flex-wrap:wrap; margin-top:22px; font-size:.9rem; color:var(--suave)}
+  .specs b{color:var(--tinta)}
+  .cover-holder{position:relative; justify-self:center}
+  .cover{width:330px; max-width:78vw; aspect-ratio:148/210; border-radius:10px; box-shadow:0 30px 60px rgba(29,58,99,.28); object-fit:cover; background:linear-gradient(180deg,#9cc0e6,#1d3a63); position:relative}
+  .cover-cap{position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; color:#fff; text-align:center; padding:24px; gap:8px}
+  .cover-cap span{font-family:Georgia,serif; font-size:1.9rem; line-height:1.05; text-shadow:0 2px 10px rgba(0,0,0,.3)}
+
+  /* GENERIC CARDS */
+  .grid-2{display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:center}
+  .card{background:#fff; border:1px solid var(--linea); border-radius:var(--radio); padding:30px; box-shadow:var(--sombra)}
+  .quote{font-family:Georgia,serif; font-size:1.5rem; color:var(--azul); line-height:1.4; font-style:italic; border-left:4px solid var(--dorado); padding-left:22px; margin:0}
+
+  /* AUTORA */
+  .autora{background:linear-gradient(180deg,#fff,var(--cielo-2))}
+  .autora-photo{width:100%; aspect-ratio:4/5; object-fit:cover; border-radius:var(--radio); box-shadow:var(--sombra); background:var(--cielo)}
+  .photo-ph{display:flex; align-items:center; justify-content:center; color:var(--azul-2); text-align:center; font-size:.85rem; padding:16px}
+
+  /* ENFERMEDAD */
+  .raras{background:var(--azul); color:#eaf1fa}
+  .raras h2,.raras h3{color:#fff}
+  .raras .eyebrow{color:var(--cielo)}
+  .raras .lead{color:#c5d6ec}
+  .facts{display:grid; grid-template-columns:repeat(4,1fr); gap:18px; margin-top:30px}
+  .fact{background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.16); border-radius:14px; padding:22px; text-align:center}
+  .fact .n{font-family:Georgia,serif; font-size:2.1rem; color:#fff; font-weight:700}
+  .fact .l{font-size:.82rem; color:#bcd0e8}
+  .info-cols{display:grid; grid-template-columns:1fr 1fr; gap:30px; margin-top:34px}
+  .raras .card{background:rgba(255,255,255,.06); border-color:rgba(255,255,255,.16); color:#e6eefa}
+  .raras .card h3{margin-top:0}
+
+  /* GALERIA */
+  .gallery{display:grid; grid-template-columns:repeat(3,1fr); gap:16px}
+  .g-item{position:relative; aspect-ratio:1; border-radius:14px; overflow:hidden; background:var(--cielo); box-shadow:var(--sombra)}
+  .g-item img{width:100%; height:100%; object-fit:cover}
+  .g-empty{display:flex; align-items:center; justify-content:center; color:var(--azul-2); text-align:center; font-size:.85rem; padding:14px; height:100%}
+
+  /* VIDEOS */
+  .videos{background:var(--cielo-2)}
+  .video-grid{display:grid; grid-template-columns:1fr 1fr; gap:24px}
+  .video-card{background:#fff; border-radius:var(--radio); overflow:hidden; box-shadow:var(--sombra); border:1px solid var(--linea)}
+  .video-frame{position:relative; aspect-ratio:16/9; background:#0c1726}
+  .video-frame iframe,.video-frame video{position:absolute; inset:0; width:100%; height:100%; border:0}
+  .video-empty{display:flex; align-items:center; justify-content:center; color:var(--cielo); text-align:center; padding:16px; height:100%; font-size:.9rem}
+  .video-card .vcap{padding:14px 18px; font-weight:600; color:var(--azul)}
+
+  /* PRENSA */
+  .prensa-item{display:grid; grid-template-columns:120px 1fr; gap:22px; align-items:center; background:#fff; border:1px solid var(--linea); border-radius:14px; padding:20px; box-shadow:var(--sombra); margin-bottom:16px}
+  .prensa-logo{font-family:Georgia,serif; font-weight:700; color:var(--azul); text-align:center; border-right:1px solid var(--linea); padding-right:20px}
+  .prensa-item:last-child{margin-bottom:0}
+
+  /* RESEÑAS */
+  .resenas{background:linear-gradient(180deg,var(--cielo-2),#fff)}
+  .resena-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px}
+  .resena{background:#fff; border:1px solid var(--linea); border-radius:var(--radio); padding:26px; box-shadow:var(--sombra); position:relative}
+  .stars{color:var(--dorado); font-size:1.1rem; letter-spacing:2px; margin-bottom:10px}
+  .resena .txt{font-style:italic; color:var(--tinta)}
+  .resena .who{margin-top:14px; font-weight:700; color:var(--azul); font-size:.95rem}
+
+  /* CTA FINAL */
+  .cta-final{background:var(--azul); color:#fff; text-align:center}
+  .cta-final h2{color:#fff}
+  .cta-final .btn{background:#fff; color:var(--azul)}
+  .cta-final .btn:hover{background:var(--cielo-2)}
+
+  footer{background:#16263f; color:#9fb4d0; text-align:center; padding:36px 22px; font-size:.88rem}
+  footer a{color:var(--cielo)}
+
+  /* COMPARTIR */
+  .compartir{background:#fff; text-align:center}
+  .share-btns{display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin-top:26px}
+  .share-btn{display:inline-flex; align-items:center; gap:9px; padding:13px 22px; border-radius:999px; color:#fff; text-decoration:none; font-weight:700; border:none; cursor:pointer; font-size:.95rem; transition:transform .15s, opacity .15s; box-shadow:var(--sombra)}
+  .share-btn:hover{transform:translateY(-2px); opacity:.93}
+  .sb-wa{background:#25d366} .sb-fb{background:#1877f2} .sb-x{background:#101418}
+  .sb-ig{background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)} .sb-tg{background:#229ed9} .sb-link{background:var(--azul)}
+
+  /* CONTACTO */
+  .contacto{background:linear-gradient(180deg,#fff,var(--cielo-2))}
+  .form-card{background:#fff; border:1px solid var(--linea); border-radius:var(--radio); padding:32px; box-shadow:var(--sombra); max-width:620px; margin:28px auto 0}
+  .form-row{display:grid; grid-template-columns:1fr 1fr; gap:16px}
+  .form-card label{display:block; font-weight:600; color:var(--azul); font-size:.9rem; margin:0 0 6px}
+  .form-card input,.form-card textarea{width:100%; padding:12px 14px; border:1px solid var(--linea); border-radius:10px; font-size:.95rem; font-family:inherit; margin-bottom:16px}
+  .form-card input:focus,.form-card textarea:focus{outline:2px solid var(--azul-2); border-color:var(--azul-2)}
+
+  /* ====== EDIT MODE ====== */
+  .edit-bar{position:fixed; right:18px; bottom:18px; z-index:200; display:flex; flex-direction:column; gap:10px; align-items:flex-end}
+  .fab{background:var(--azul); color:#fff; border:none; border-radius:999px; padding:13px 22px; font-weight:700; font-size:.95rem; cursor:pointer; box-shadow:0 8px 24px rgba(0,0,0,.25); display:flex; align-items:center; gap:8px}
+  .fab.sec{background:#fff; color:var(--azul); border:1px solid var(--linea); padding:10px 18px; font-size:.85rem}
+  .edit-panel{display:none; flex-direction:column; gap:8px; background:#fff; border:1px solid var(--linea); border-radius:14px; padding:12px; box-shadow:0 10px 30px rgba(0,0,0,.2); max-width:240px}
+  body.editing .edit-panel{display:flex}
+  body.editing [data-edit]{outline:2px dashed var(--dorado); outline-offset:3px; border-radius:4px; cursor:text; transition:outline .15s}
+  body.editing [data-edit]:hover{outline-color:var(--azul)}
+  body.editing [data-edit]:focus{outline:2px solid var(--azul); background:#fffdf6}
+  .img-edit{position:absolute; top:8px; right:8px; z-index:5; display:none; gap:6px}
+  body.editing .img-edit{display:flex}
+  .img-btn{background:rgba(29,58,99,.92); color:#fff; border:none; width:34px; height:34px; border-radius:8px; cursor:pointer; font-size:15px; display:flex; align-items:center; justify-content:center}
+  .img-btn:hover{background:var(--azul-2)}
+  .add-tile{border:2px dashed var(--azul-2); border-radius:14px; display:none; align-items:center; justify-content:center; min-height:120px; color:var(--azul-2); cursor:pointer; font-weight:700; background:rgba(47,86,137,.05)}
+  body.editing .add-tile{display:flex}
+  .removable{position:relative}
+  .del-x{position:absolute; top:-10px; right:-10px; background:var(--rojo); color:#fff; border:none; width:28px; height:28px; border-radius:50%; cursor:pointer; display:none; z-index:6; font-weight:700}
+  body.editing .removable .del-x{display:block}
+  .edit-hint{position:fixed; left:50%; top:74px; transform:translateX(-50%); background:var(--azul); color:#fff; padding:9px 18px; border-radius:999px; font-size:.85rem; z-index:200; display:none; box-shadow:var(--sombra)}
+  body.editing .edit-hint{display:block}
+  .toast{position:fixed; left:50%; bottom:26px; transform:translateX(-50%) translateY(20px); background:var(--ok); color:#fff; padding:12px 22px; border-radius:999px; font-weight:600; opacity:0; transition:.3s; z-index:300; pointer-events:none}
+  .toast.show{opacity:1; transform:translateX(-50%) translateY(0)}
+  .hidden-input{display:none}
+
+  /* MODALS */
+  .modal{display:none; position:fixed; inset:0; z-index:400; background:rgba(20,30,50,.55); align-items:center; justify-content:center; padding:20px}
+  .modal.show{display:flex}
+  .modal-box{background:#fff; border-radius:16px; padding:26px; max-width:440px; width:100%; box-shadow:0 20px 60px rgba(0,0,0,.3)}
+  .modal-box h3{margin:0 0 6px}
+  .modal-box p{color:var(--suave); font-size:.9rem; margin:0 0 14px}
+  .modal-box input,.modal-box textarea{width:100%; padding:11px 13px; border:1px solid var(--linea); border-radius:10px; font-size:.95rem; margin-bottom:12px; font-family:inherit}
+  .modal-actions{display:flex; gap:10px; justify-content:flex-end; flex-wrap:wrap}
+  .modal-actions button{padding:10px 18px; border-radius:10px; border:none; cursor:pointer; font-weight:700}
+  .m-ok{background:var(--azul); color:#fff}
+  .m-cancel{background:#eee; color:var(--tinta)}
+
+  @media(max-width:860px){
+    .hero .wrap,.grid-2,.info-cols{grid-template-columns:1fr}
+    .cover-holder{order:-1}
+    .facts{grid-template-columns:1fr 1fr}
+    .video-grid,.resena-grid{grid-template-columns:1fr}
+    .gallery{grid-template-columns:1fr 1fr}
+    .navlinks{display:none}
+    .prensa-item{grid-template-columns:1fr}
+    .prensa-logo{border-right:none; border-bottom:1px solid var(--linea); padding:0 0 12px}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <span class="brand" data-edit="brand">El cielo tiene nubes</span>
+    <div class="navlinks">
+      <a href="#libro">El libro</a>
+      <a href="#autora">La autora</a>
+      <a href="#raras">Enfermedades raras</a>
+      <a href="#galeria">Galería</a>
+      <a href="#videos">Vídeos</a>
+      <a href="#prensa">Prensa</a>
+      <a href="#contacto">Contacto</a>
+      <a href="#comprar" class="nav-cta">Comprar</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="inicio">
+  <div class="wrap">
+    <div class="hero-text">
+      <span class="badge-real" data-edit="badge">Una historia real</span>
+      <p class="sub" data-edit="hero-sub">de Alba Farrapeira Domínguez</p>
+      <h1 data-edit="hero-title">El cielo tiene nubes, pero no llueve</h1>
+      <p class="lead" data-edit="hero-lead">Una historia real de supervivencia, dolor, amor y esperanza. Un viaje de resiliencia frente a una enfermedad rara, donde incluso en los días más oscuros siempre existe una razón para seguir adelante.</p>
+      <div class="price-row">
+        <div class="price" data-edit="precio">10,90 €<small>Tapa blanda</small></div>
+        <a href="https://publishes.bookmundo.com/site/?r=userwebsite/index&id=alba_farrapeiradominguez/bookdetails/22069939" target="_blank" rel="noopener" class="btn" data-link="comprar">Comprar ahora</a>
+      </div>
+      <div class="specs">
+        <span><b data-edit="spec-paginas">163</b> páginas</span>
+        <span><b data-edit="spec-idioma">Español</b> (Castellano)</span>
+        <span><b data-edit="spec-tamano">148 × 210 mm</b></span>
+      </div>
+    </div>
+    <div class="cover-holder">
+      <div class="removable">
+        <div class="img-edit"><button class="img-btn" data-imgkey="cover" title="Cambiar portada">📷</button><button class="img-btn" data-imgdel="cover" title="Quitar imagen">🗑</button></div>
+        <img class="cover" data-img="cover" alt="Portada del libro" style="display:none">
+        <div class="cover cover-cap" data-img-ph="cover">
+          <span data-edit="cover-t1">El cielo tiene</span>
+          <span data-edit="cover-t2">NUBES</span>
+          <span style="font-size:1rem; font-style:italic" data-edit="cover-t3">pero no llueve</span>
+          <small style="margin-top:auto; font-size:.7rem; opacity:.85">📷 Pulsa Editar para subir la portada real</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- EL LIBRO -->
+<section id="libro">
+  <div class="wrap">
+    <p class="eyebrow">Sobre el libro</p>
+    <div class="grid-2">
+      <div>
+        <h2 data-edit="libro-h">Un relato sobre supervivencia, no solo sobre enfermedad</h2>
+        <p data-edit="libro-p1"><em>El cielo tiene nubes, pero no llueve</em> es una historia real nacida desde el dolor, la lucha y la esperanza. A través de recuerdos, heridas, aprendizajes y emociones profundas, la autora abre su corazón para contar el camino de una vida marcada por la resiliencia frente a una enfermedad rara: el déficit de prolidasa.</p>
+        <p data-edit="libro-p2">Este no es solo un relato sobre enfermedad, sino sobre supervivencia. Sobre aprender a sostenerse cuando todo parece romperse. Sobre las personas que se quedan, el amor que salva y las cicatrices que también enseñan.</p>
+        <p data-edit="libro-p3">Entre capítulos íntimos y reflexiones sinceras, estas páginas hablan del miedo, de la pérdida, de volver a levantarse y de encontrar luz incluso cuando el cielo parece lleno de nubes.</p>
+      </div>
+      <div class="card">
+        <p class="quote" data-edit="libro-quote">«No hablo de mi enfermedad para dar pena, sino esperanza. Un diagnóstico no te define ni te puede parar.»</p>
+        <p style="margin:18px 0 0; color:var(--suave); font-weight:600" data-edit="libro-quote-a">— Alba Farrapeira</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LA AUTORA -->
+<section id="autora" class="autora">
+  <div class="wrap">
+    <p class="eyebrow">La autora</p>
+    <div class="grid-2">
+      <div class="removable">
+        <div class="img-edit"><button class="img-btn" data-imgkey="autora" title="Cambiar foto">📷</button><button class="img-btn" data-imgdel="autora" title="Quitar imagen">🗑</button></div>
+        <img class="autora-photo" data-img="autora" alt="Alba Farrapeira" style="display:none">
+        <div class="autora-photo photo-ph" data-img-ph="autora">📷 Pulsa «Editar» y sube una foto de la autora</div>
+      </div>
+      <div>
+        <h2 data-edit="autora-h">Alba Farrapeira Domínguez</h2>
+        <p data-edit="autora-p1">Nacida en Galicia y vecina de Salceda de Caselas, fue diagnosticada con una enfermedad rara a los 15 años, un momento que marcó profundamente su vida y la obligó a aprender demasiado pronto el significado de la lucha, la incertidumbre y la resiliencia.</p>
+        <p data-edit="autora-p2">Durante años ocultó las heridas que cubrían sus piernas y pies por miedo a dar pena. Hoy ha decidido hacer justo lo contrario: contar su historia para dar esperanza y visibilidad a unas enfermedades que siguen siendo grandes desconocidas para buena parte de la sociedad.</p>
+        <p data-edit="autora-p3">Escrito a lo largo de un año, su libro es, en sus propias palabras, «un abrazo para quienes luchan en silencio».</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ENFERMEDADES RARAS -->
+<section id="raras" class="raras">
+  <div class="wrap">
+    <p class="eyebrow">Por qué este libro importa</p>
+    <h2 data-edit="raras-h">Enfermedades raras: la lucha que casi nadie ve</h2>
+    <p class="lead" data-edit="raras-lead">El déficit de prolidasa es una enfermedad genética ultrarrara que dificulta la correcta reparación de los tejidos. Provoca úlceras crónicas en piernas y pies que, al infectarse, pueden volver insoportable algo tan cotidiano como caminar o levantarse.</p>
+    <div class="facts">
+      <div class="fact removable">
+        <button class="del-x" data-delfact>×</button>
+        <div class="n" data-edit="fact1-n">+7.000</div>
+        <div class="l" data-edit="fact1-l">enfermedades raras descritas en el mundo</div>
+      </div>
+      <div class="fact removable">
+        <button class="del-x" data-delfact>×</button>
+        <div class="n" data-edit="fact2-n">1 de cada 2.000</div>
+        <div class="l" data-edit="fact2-l">personas afectadas define una enfermedad como rara</div>
+      </div>
+      <div class="fact removable">
+        <button class="del-x" data-delfact>×</button>
+        <div class="n" data-edit="fact3-n">~5 años</div>
+        <div class="l" data-edit="fact3-l">de media hasta lograr un diagnóstico</div>
+      </div>
+      <div class="fact removable">
+        <button class="del-x" data-delfact>×</button>
+        <div class="n" data-edit="fact4-n">75%</div>
+        <div class="l" data-edit="fact4-l">de las enfermedades raras afectan a la infancia</div>
+      </div>
+    </div>
+    <div class="info-cols">
+      <div class="card">
+        <h3 data-edit="raras-c1-h">¿Qué es el déficit de prolidasa?</h3>
+        <p data-edit="raras-c1-p">Un trastorno hereditario muy poco frecuente causado por la falta de una enzima (la prolidasa) necesaria para reciclar el colágeno y reparar la piel. Sus síntomas incluyen úlceras cutáneas crónicas, infecciones recurrentes, problemas respiratorios y, en muchos casos, un largo camino hasta el diagnóstico correcto.</p>
+      </div>
+      <div class="card">
+        <h3 data-edit="raras-c2-h">Por qué dar visibilidad</h3>
+        <p data-edit="raras-c2-p">Detrás de cada enfermedad rara hay personas que luchan en silencio, familias que sostienen y una enorme falta de información. Compartir estas historias ayuda a que nadie se sienta solo, impulsa la investigación y recuerda que un diagnóstico no define a quien lo recibe.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALERIA -->
+<section id="galeria">
+  <div class="wrap">
+    <p class="eyebrow">Galería</p>
+    <h2 data-edit="galeria-h">Imágenes</h2>
+    <p class="lead" data-edit="galeria-lead">Fotos de la autora, del libro y de su presentación. Pulsa «Editar» para añadir o cambiar imágenes.</p>
+    <div class="gallery" id="galeria-grid" style="margin-top:28px">
+      <div class="add-tile" data-addgallery>+ Añadir foto</div>
+    </div>
+  </div>
+</section>
+
+<!-- VIDEOS -->
+<section id="videos" class="videos">
+  <div class="wrap">
+    <p class="eyebrow">Vídeos</p>
+    <h2 data-edit="videos-h">En vídeo</h2>
+    <p class="lead" data-edit="videos-lead">Pega un enlace de YouTube o Instagram, o sube un vídeo propio. Pulsa «Editar» para gestionarlos.</p>
+    <div class="video-grid" id="video-grid" style="margin-top:28px">
+      <div class="add-tile" data-addvideo>+ Añadir vídeo</div>
+    </div>
+  </div>
+</section>
+
+<!-- PRENSA -->
+<section id="prensa">
+  <div class="wrap">
+    <p class="eyebrow">Han hablado de ella</p>
+    <h2 data-edit="prensa-h">En los medios</h2>
+    <div id="prensa-list" style="margin-top:28px">
+      <div class="add-tile" data-addprensa>+ Añadir aparición en prensa</div>
+    </div>
+  </div>
+</section>
+
+<!-- RESEÑAS -->
+<section id="resenas" class="resenas">
+  <div class="wrap">
+    <p class="eyebrow">Lectores</p>
+    <h2 data-edit="resenas-h">Reseñas y testimonios</h2>
+    <p class="lead" data-edit="resenas-lead">Lo que cuentan quienes ya han leído el libro. Pulsa «Editar» para añadir más.</p>
+    <div class="resena-grid" id="resena-grid" style="margin-top:28px">
+      <div class="add-tile" data-addresena>+ Añadir reseña</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section id="comprar" class="cta-final">
+  <div class="wrap">
+    <h2 data-edit="cta-h">Lleva esta historia contigo</h2>
+    <p class="lead" style="color:#cdddf0; max-width:640px; margin:12px auto 26px" data-edit="cta-p">Cada ejemplar es también un gesto de apoyo a la visibilidad de las enfermedades raras. Un abrazo para quienes luchan en silencio.</p>
+    <a href="https://publishes.bookmundo.com/site/?r=userwebsite/index&id=alba_farrapeiradominguez/bookdetails/22069939" target="_blank" rel="noopener" class="btn" data-link="comprar">Comprar el libro — <span data-edit="cta-precio">10,90 €</span></a>
+  </div>
+</section>
+
+<!-- COMPARTIR -->
+<section id="compartir" class="compartir">
+  <div class="wrap">
+    <p class="eyebrow">Difunde</p>
+    <h2 data-edit="comp-h">Ayuda a dar visibilidad</h2>
+    <p class="lead" data-edit="comp-p" style="max-width:640px; margin:10px auto 0">Comparte esta historia y ayuda a que las enfermedades raras dejen de ser invisibles. Cada vez que la compartes, llegas a alguien que quizá lucha en silencio.</p>
+    <div class="share-btns">
+      <a class="share-btn sb-wa" data-share="wa">WhatsApp</a>
+      <a class="share-btn sb-fb" data-share="fb">Facebook</a>
+      <a class="share-btn sb-x" data-share="x">X (Twitter)</a>
+      <a class="share-btn sb-tg" data-share="tg">Telegram</a>
+      <a class="share-btn sb-ig" id="ig-btn" href="#" target="_blank" rel="noopener">Instagram</a>
+      <button class="share-btn sb-link" data-share="link">🔗 Copiar enlace</button>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto" class="contacto">
+  <div class="wrap">
+    <p class="eyebrow">Contacto</p>
+    <h2 data-edit="cont-h">Escríbele a la autora</h2>
+    <p class="lead" data-edit="cont-p" style="max-width:640px">¿Quieres compartir tu testimonio, invitarla a un evento o simplemente dar las gracias? Déjale un mensaje.</p>
+    <div class="form-card">
+      <div class="form-row">
+        <div><label>Nombre</label><input id="cf-nombre" type="text" placeholder="Tu nombre"></div>
+        <div><label>Email</label><input id="cf-email" type="email" placeholder="tu@email.com"></div>
+      </div>
+      <label>Mensaje</label>
+      <textarea id="cf-msg" rows="5" placeholder="Escribe tu mensaje..."></textarea>
+      <button class="btn" id="cf-send" style="width:100%; justify-content:center">Enviar mensaje</button>
+      <p style="font-size:.82rem; color:var(--suave); margin:14px 0 0; text-align:center">Se abrirá tu aplicación de correo con el mensaje listo para enviar.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p data-edit="footer-1">© <span id="year"></span> Alba Farrapeira Domínguez — «El cielo tiene nubes, pero no llueve»</p>
+  <p data-edit="footer-2">Historia real de supervivencia y resiliencia frente a una enfermedad rara (déficit de prolidasa).</p>
+</footer>
+
+<!-- ===== EDIT UI ===== -->
+<div class="edit-hint">Modo edición: pulsa cualquier texto para cambiarlo · 📷 cambia imágenes · + añade contenido</div>
+
+<div class="edit-bar">
+  <div class="edit-panel">
+    <button class="fab sec" id="btn-export">⬇ Guardar copia (archivo)</button>
+    <button class="fab sec" id="btn-import">⬆ Cargar copia</button>
+    <button class="fab sec" id="btn-config">⚙️ Instagram y email</button>
+    <button class="fab sec" id="btn-pass">🔑 Cambiar contraseña</button>
+    <button class="fab sec" id="btn-reset" style="color:var(--rojo)">↺ Restablecer todo</button>
+  </div>
+  <button class="fab" id="btn-edit">🔒 Editar</button>
+</div>
+
+<input type="file" id="file-img" accept="image/*" class="hidden-input">
+<input type="file" id="file-video" accept="video/*" class="hidden-input">
+<input type="file" id="file-import" accept="application/json" class="hidden-input">
+<div class="toast" id="toast"></div>
+
+<!-- MODAL CONFIG -->
+<div class="modal" id="modal-config">
+  <div class="modal-box">
+    <h3>Instagram y email de contacto</h3>
+    <p>Enlace de tu perfil de Instagram y correo donde recibir los mensajes del formulario.</p>
+    <input type="text" id="cfg-ig" placeholder="https://instagram.com/tu_perfil">
+    <input type="email" id="cfg-email" placeholder="correo@ejemplo.com">
+    <div class="modal-actions">
+      <button class="m-cancel" data-closemodal>Cancelar</button>
+      <button class="m-ok" id="cfg-ok">Guardar</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL LOGIN -->
+<div class="modal" id="modal-login">
+  <div class="modal-box">
+    <h3>Acceso de administrador</h3>
+    <p>Solo el administrador puede editar la web. Introduce la contraseña.</p>
+    <input type="password" id="login-pass" placeholder="Contraseña">
+    <div class="modal-actions">
+      <button class="m-cancel" data-closemodal>Cancelar</button>
+      <button class="m-ok" id="login-ok">Entrar</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL VIDEO -->
+<div class="modal" id="modal-video">
+  <div class="modal-box">
+    <h3>Añadir vídeo</h3>
+    <p>Pega un enlace de YouTube o Instagram, o usa el botón para subir un vídeo desde tu equipo.</p>
+    <input type="text" id="video-url" placeholder="https://www.youtube.com/watch?v=...">
+    <input type="text" id="video-title" placeholder="Título (opcional)">
+    <div class="modal-actions">
+      <button class="m-cancel" data-closemodal>Cancelar</button>
+      <button class="fab sec" id="video-upload-btn" style="margin:0">Subir archivo</button>
+      <button class="m-ok" id="video-add-ok">Añadir enlace</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL RESEÑA -->
+<div class="modal" id="modal-resena">
+  <div class="modal-box">
+    <h3>Añadir reseña</h3>
+    <p>Escribe el testimonio y el nombre de la persona.</p>
+    <textarea id="resena-txt" rows="4" placeholder="«Un libro que emociona y da esperanza...»"></textarea>
+    <input type="text" id="resena-who" placeholder="Nombre — Ciudad">
+    <input type="number" id="resena-stars" min="1" max="5" value="5" placeholder="Estrellas (1-5)">
+    <div class="modal-actions">
+      <button class="m-cancel" data-closemodal>Cancelar</button>
+      <button class="m-ok" id="resena-add-ok">Añadir</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL PRENSA -->
+<div class="modal" id="modal-prensa">
+  <div class="modal-box">
+    <h3>Añadir aparición en prensa</h3>
+    <p>Medio, titular y enlace (opcional).</p>
+    <input type="text" id="prensa-medio" placeholder="Medio (ej. La Voz de Galicia)">
+    <input type="text" id="prensa-titular" placeholder="Titular o resumen">
+    <input type="text" id="prensa-url" placeholder="Enlace (opcional)">
+    <div class="modal-actions">
+      <button class="m-cancel" data-closemodal>Cancelar</button>
+      <button class="m-ok" id="prensa-add-ok">Añadir</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const STORE = 'cielo_nubes_v1';
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+document.getElementById('year').textContent = new Date().getFullYear();
+
+let state = { text:{}, img:{}, gallery:[], videos:[], resenas:[], prensa:[], adminPass:'alba2026', igUrl:'https://instagram.com', contactEmail:'' };
+let isAdmin = false;
+
+function load(){
+  try{ const raw = localStorage.getItem(STORE); if(raw) state = Object.assign(state, JSON.parse(raw)); }catch(e){}
+}
+function save(){
+  try{ localStorage.setItem(STORE, JSON.stringify(state)); }catch(e){ toast('No se pudo guardar (imagen demasiado grande)', true); }
+}
+function toast(msg, err){
+  const t = $('#toast'); t.textContent = msg; t.style.background = err? 'var(--rojo)':'var(--ok)';
+  t.classList.add('show'); setTimeout(()=>t.classList.remove('show'), 2200);
+}
+
+function applyText(){
+  $$('[data-edit]').forEach(el=>{
+    const k = el.dataset.edit;
+    if(state.text[k] !== undefined) el.innerHTML = state.text[k];
+  });
+}
+function applyImg(){
+  $$('[data-img]').forEach(img=>{
+    const k = img.dataset.img;
+    const ph = document.querySelector('[data-img-ph="'+k+'"]');
+    if(state.img[k]){ img.src = state.img[k]; img.style.display=''; if(ph) ph.style.display='none'; }
+    else { img.style.display='none'; if(ph) ph.style.display=''; }
+  });
+}
+
+function renderGallery(){
+  const grid = $('#galeria-grid');
+  grid.querySelectorAll('.g-item').forEach(n=>n.remove());
+  const add = grid.querySelector('[data-addgallery]');
+  state.gallery.forEach((src, i)=>{
+    const d = document.createElement('div');
+    d.className = 'g-item removable';
+    d.innerHTML = '<button class="del-x" data-delgallery="'+i+'">×</button><img src="'+src+'" alt="Galería">';
+    grid.insertBefore(d, add);
+  });
+}
+function ytId(url){
+  const m = url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/))([\w-]{11})/);
+  return m? m[1] : null;
+}
+function videoEmbed(v){
+  if(v.type==='file') return '<video controls src="'+v.src+'"></video>';
+  const id = ytId(v.url);
+  if(id) return '<iframe src="https://www.youtube.com/embed/'+id+'" allowfullscreen></iframe>';
+  if(/instagram\.com/.test(v.url)) return '<iframe src="'+v.url.replace(/\/?$/,'/')+'embed" allowfullscreen></iframe>';
+  return '<div class="video-empty">Enlace no reconocido.<br><a href="'+v.url+'" target="_blank" style="color:#cfe0f5">Abrir vídeo ↗</a></div>';
+}
+function renderVideos(){
+  const grid = $('#video-grid');
+  grid.querySelectorAll('.video-card').forEach(n=>n.remove());
+  const add = grid.querySelector('[data-addvideo]');
+  state.videos.forEach((v,i)=>{
+    const c = document.createElement('div');
+    c.className='video-card removable';
+    c.innerHTML = '<button class="del-x" data-delvideo="'+i+'">×</button><div class="video-frame">'+videoEmbed(v)+'</div>'+(v.title?'<div class="vcap">'+v.title+'</div>':'');
+    grid.insertBefore(c, add);
+  });
+}
+function renderResenas(){
+  const grid = $('#resena-grid');
+  grid.querySelectorAll('.resena').forEach(n=>n.remove());
+  const add = grid.querySelector('[data-addresena]');
+  state.resenas.forEach((r,i)=>{
+    const stars = '★'.repeat(r.stars||5) + '☆'.repeat(5-(r.stars||5));
+    const d = document.createElement('div');
+    d.className='resena removable';
+    d.innerHTML = '<button class="del-x" data-delresena="'+i+'">×</button><div class="stars">'+stars+'</div><div class="txt">«'+r.txt+'»</div><div class="who">— '+r.who+'</div>';
+    grid.insertBefore(d, add);
+  });
+}
+function renderPrensa(){
+  const list = $('#prensa-list');
+  list.querySelectorAll('.prensa-item').forEach(n=>n.remove());
+  const add = list.querySelector('[data-addprensa]');
+  state.prensa.forEach((p,i)=>{
+    const d = document.createElement('div');
+    d.className='prensa-item removable';
+    const titular = p.url ? '<a href="'+p.url+'" target="_blank" rel="noopener">'+p.titular+' ↗</a>' : p.titular;
+    d.innerHTML = '<button class="del-x" data-delprensa="'+i+'">×</button><div class="prensa-logo">'+p.medio+'</div><div><strong style="color:var(--azul)">'+titular+'</strong></div>';
+    list.insertBefore(d, add);
+  });
+}
+
+function seedDefaults(){
+  if(!localStorage.getItem(STORE)){
+    state.prensa = [{medio:'La Voz de Galicia', titular:'«La niña de Salceda que ocultaba las heridas publica un libro sobre su historia»', url:''}];
+    state.resenas = [
+      {stars:5, txt:'Una historia que te toca el corazón. Imposible no emocionarse con cada página.', who:'Lectora — Galicia'},
+      {stars:5, txt:'Más que un libro sobre una enfermedad, es una lección de fuerza y esperanza.', who:'Lector — Vigo'}
+    ];
+    save();
+  }
+}
+
+function applyConfig(){
+  const ig = document.getElementById('ig-btn');
+  if(ig) ig.href = state.igUrl || 'https://instagram.com';
+}
+function renderAll(){ applyText(); applyImg(); renderGallery(); renderVideos(); renderResenas(); renderPrensa(); applyConfig(); }
+
+function setupTextEditing(){
+  $$('[data-edit]').forEach(el=>{
+    el.addEventListener('input', ()=>{
+      if(!document.body.classList.contains('editing')) return;
+      state.text[el.dataset.edit] = el.innerHTML; save();
+    });
+  });
+}
+function toggleEdit(){
+  // si aún no es administrador, pedir contraseña
+  if(!isAdmin && !document.body.classList.contains('editing')){
+    openModal('modal-login'); setTimeout(()=>$('#login-pass').focus(), 50); return;
+  }
+  const on = document.body.classList.toggle('editing');
+  $$('[data-edit]').forEach(el=> el.setAttribute('contenteditable', on));
+  $('#btn-edit').innerHTML = on ? '✅ Hecho' : '🔓 Editar';
+  if(!on) toast('Cambios guardados');
+}
+function doLogin(){
+  const val = $('#login-pass').value;
+  if(val === (state.adminPass || 'alba2026')){
+    isAdmin = true; closeModals(); $('#login-pass').value='';
+    $('#btn-edit').innerHTML='🔓 Editar'; toast('Acceso concedido'); toggleEdit();
+  } else { toast('Contraseña incorrecta', true); $('#login-pass').select(); }
+}
+
+let imgTargetKey = null;
+function pickImage(key){ imgTargetKey = key; $('#file-img').click(); }
+function fileToDataURL(file, cb){
+  const r = new FileReader(); r.onload = e=> cb(e.target.result); r.readAsDataURL(file);
+}
+function compressImage(file, cb){
+  const r = new FileReader();
+  r.onload = e=>{
+    const img = new Image();
+    img.onload = ()=>{
+      const max = 1400; let w = img.width, h = img.height;
+      if(w>max || h>max){ const s = max/Math.max(w,h); w*=s; h*=s; }
+      const c = document.createElement('canvas'); c.width=w; c.height=h;
+      c.getContext('2d').drawImage(img,0,0,w,h);
+      cb(c.toDataURL('image/jpeg', 0.82));
+    };
+    img.src = e.target.result;
+  };
+  r.readAsDataURL(file);
+}
+
+$('#btn-edit').addEventListener('click', toggleEdit);
+
+document.body.addEventListener('click', e=>{
+  const editing = document.body.classList.contains('editing');
+  const ib = e.target.closest('[data-imgkey]');
+  if(ib && editing){ pickImage(ib.dataset.imgkey); return; }
+  const idel = e.target.closest('[data-imgdel]');
+  if(idel && editing){ delete state.img[idel.dataset.imgdel]; save(); applyImg(); toast('Imagen eliminada'); return; }
+  if(e.target.closest('[data-addgallery]') && editing){ imgTargetKey='__gallery'; $('#file-img').click(); return; }
+  const dg = e.target.closest('[data-delgallery]');
+  if(dg){ state.gallery.splice(+dg.dataset.delgallery,1); save(); renderGallery(); return; }
+  if(e.target.closest('[data-addvideo]') && editing){ openModal('modal-video'); return; }
+  const dv = e.target.closest('[data-delvideo]');
+  if(dv){ state.videos.splice(+dv.dataset.delvideo,1); save(); renderVideos(); return; }
+  if(e.target.closest('[data-addresena]') && editing){ openModal('modal-resena'); return; }
+  const dr = e.target.closest('[data-delresena]');
+  if(dr){ state.resenas.splice(+dr.dataset.delresena,1); save(); renderResenas(); return; }
+  if(e.target.closest('[data-addprensa]') && editing){ openModal('modal-prensa'); return; }
+  const dp = e.target.closest('[data-delprensa]');
+  if(dp){ state.prensa.splice(+dp.dataset.delprensa,1); save(); renderPrensa(); return; }
+  const df = e.target.closest('[data-delfact]');
+  if(df){ df.closest('.fact').remove(); return; }
+  if(e.target.closest('[data-closemodal]') || e.target.classList.contains('modal')){ closeModals(); }
+});
+
+$('#file-img').addEventListener('change', e=>{
+  const f = e.target.files[0]; if(!f) return;
+  compressImage(f, data=>{
+    if(imgTargetKey==='__gallery'){ state.gallery.push(data); save(); renderGallery(); }
+    else { state.img[imgTargetKey] = data; save(); applyImg(); }
+    toast('Imagen actualizada');
+  });
+  e.target.value='';
+});
+
+function openModal(id){ $('#'+id).classList.add('show'); }
+function closeModals(){ $$('.modal').forEach(m=>m.classList.remove('show')); }
+
+$('#video-add-ok').addEventListener('click', ()=>{
+  const url = $('#video-url').value.trim(); if(!url){ toast('Pega un enlace', true); return; }
+  state.videos.push({type:'url', url, title:$('#video-title').value.trim()});
+  save(); renderVideos(); closeModals(); $('#video-url').value=''; $('#video-title').value=''; toast('Vídeo añadido');
+});
+$('#video-upload-btn').addEventListener('click', ()=> $('#file-video').click());
+$('#file-video').addEventListener('change', e=>{
+  const f = e.target.files[0]; if(!f) return;
+  fileToDataURL(f, data=>{
+    state.videos.push({type:'file', src:data, title:$('#video-title').value.trim()});
+    save(); renderVideos(); closeModals(); toast('Vídeo subido');
+  });
+  e.target.value='';
+});
+$('#resena-add-ok').addEventListener('click', ()=>{
+  const txt = $('#resena-txt').value.trim(), who=$('#resena-who').value.trim();
+  if(!txt){ toast('Escribe el texto', true); return; }
+  state.resenas.push({txt, who:who||'Lector/a', stars:Math.min(5,Math.max(1,+$('#resena-stars').value||5))});
+  save(); renderResenas(); closeModals(); $('#resena-txt').value=''; $('#resena-who').value=''; toast('Reseña añadida');
+});
+$('#prensa-add-ok').addEventListener('click', ()=>{
+  const medio=$('#prensa-medio').value.trim(), titular=$('#prensa-titular').value.trim();
+  if(!medio||!titular){ toast('Completa medio y titular', true); return; }
+  state.prensa.push({medio, titular, url:$('#prensa-url').value.trim()});
+  save(); renderPrensa(); closeModals(); $('#prensa-medio').value=''; $('#prensa-titular').value=''; $('#prensa-url').value=''; toast('Añadido');
+});
+
+$('#login-ok').addEventListener('click', doLogin);
+$('#login-pass').addEventListener('keydown', e=>{ if(e.key==='Enter') doLogin(); });
+$('#btn-pass').addEventListener('click', ()=>{
+  if(!isAdmin){ toast('Entra como administrador primero', true); return; }
+  const np = prompt('Nueva contraseña de administrador:');
+  if(np && np.trim()){ state.adminPass = np.trim(); save(); toast('Contraseña actualizada'); }
+});
+
+$('#btn-export').addEventListener('click', ()=>{
+  const blob = new Blob([JSON.stringify(state)], {type:'application/json'});
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+  a.download = 'web-libro-copia.json'; a.click(); toast('Copia descargada');
+});
+$('#btn-import').addEventListener('click', ()=> $('#file-import').click());
+$('#file-import').addEventListener('change', e=>{
+  const f = e.target.files[0]; if(!f) return;
+  const r = new FileReader();
+  r.onload = ev=>{ try{ state = JSON.parse(ev.target.result); save(); location.reload(); }catch(err){ toast('Archivo no válido', true);} };
+  r.readAsText(f); e.target.value='';
+});
+$('#btn-reset').addEventListener('click', ()=>{
+  if(confirm('¿Restablecer toda la web a su estado original? Se perderán tus cambios.')){
+    localStorage.removeItem(STORE); location.reload();
+  }
+});
+
+// ---- COMPARTIR ----
+function shareText(){
+  const t = (state.text['hero-title'] || 'El cielo tiene nubes, pero no llueve');
+  return t + ' — una historia real sobre superación y enfermedades raras';
+}
+document.addEventListener('click', e=>{
+  const sb = e.target.closest('[data-share]'); if(!sb) return;
+  const url = encodeURIComponent(location.href);
+  const txt = encodeURIComponent(shareText());
+  const k = sb.dataset.share;
+  let go = null;
+  if(k==='wa') go='https://wa.me/?text='+txt+'%20'+url;
+  else if(k==='fb') go='https://www.facebook.com/sharer/sharer.php?u='+url;
+  else if(k==='x') go='https://twitter.com/intent/tweet?text='+txt+'&url='+url;
+  else if(k==='tg') go='https://t.me/share/url?url='+url+'&text='+txt;
+  else if(k==='link'){
+    const fn = ()=>toast('Enlace copiado');
+    if(navigator.clipboard){ navigator.clipboard.writeText(location.href).then(fn).catch(()=>prompt('Copia el enlace:', location.href)); }
+    else prompt('Copia el enlace:', location.href);
+    return;
+  }
+  if(go) window.open(go, '_blank', 'noopener');
+});
+
+// ---- FORMULARIO DE CONTACTO ----
+$('#cf-send').addEventListener('click', ()=>{
+  const n=$('#cf-nombre').value.trim(), em=$('#cf-email').value.trim(), msg=$('#cf-msg').value.trim();
+  if(!msg){ toast('Escribe un mensaje', true); return; }
+  const dest = state.contactEmail;
+  const body = encodeURIComponent('Nombre: '+(n||'-')+'\nEmail: '+(em||'-')+'\n\n'+msg);
+  const subj = encodeURIComponent('Mensaje desde la web del libro');
+  if(dest){ window.location.href='mailto:'+dest+'?subject='+subj+'&body='+body; toast('Abriendo tu correo...'); }
+  else { toast('Falta configurar el email (⚙️ en modo admin)', true); }
+});
+
+// ---- CONFIG ----
+$('#btn-config').addEventListener('click', ()=>{
+  if(!isAdmin){ toast('Entra como administrador primero', true); return; }
+  $('#cfg-ig').value = state.igUrl || '';
+  $('#cfg-email').value = state.contactEmail || '';
+  openModal('modal-config');
+});
+$('#cfg-ok').addEventListener('click', ()=>{
+  state.igUrl = $('#cfg-ig').value.trim() || 'https://instagram.com';
+  state.contactEmail = $('#cfg-email').value.trim();
+  save(); applyConfig(); closeModals(); toast('Configuración guardada');
+});
+
+load(); seedDefaults(); load(); renderAll(); setupTextEditing();
+</script>
+</body>
+</html>
